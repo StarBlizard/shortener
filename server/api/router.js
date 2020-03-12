@@ -5,7 +5,8 @@ const shortUrl   = srequire('controllers/short');
 const setWebhook = srequire('controllers/webhook');
 
 module.exports = function(app) {
-  app.post('/get'       , get);
+  app.get('/get', get);
+
   app.post('/short'     , shortUrl);
   app.post('/setWebhook', setWebhook);
 };

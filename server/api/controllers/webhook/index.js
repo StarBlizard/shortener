@@ -4,7 +4,7 @@ const ErrorHelper = srequire('error');
 const { sites, webhooks } = srequire('models');
 
 module.exports = async function (req, res) {
-  const { siteID, endpoint } = req.body;
+  const { siteID, endpoint, type } = req.body;
 
   if (!siteID || !endpoint) {
     const error = new Error('Validation Error');
@@ -25,12 +25,12 @@ module.exports = async function (req, res) {
   }
 
   try {
-    webhook = await webhooks.getOne({ siteID });
+    webhook = await webhooks.getOne({ where: { type, siteID } });
     webhook = await webhook.updateData({ endpoint });
   } catch (error) {
     if (error.message != 'Not Found') { return ErrorHelper.handleResponse(error, res); }
 
-    webhook = await webhooks.generate({ siteID, endpoint });
+    webhook = await webhooks.generate({ type, siteID, endpoint });
   }
 
     res.send(webhook);

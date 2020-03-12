@@ -9,7 +9,7 @@ const { webhooks, shortenedUrls } = srequire('models');
 module.exports = async function (req, res) {
   const { id } = req.query;
 
-  if (id) {
+  if (!id) {
     const error = new Error('Validation Error');
 
     error.path = __filename;
@@ -22,7 +22,7 @@ module.exports = async function (req, res) {
   let siteID;
 
   try {
-    shortenedUrl = await shortenedUrls.getOne({ id });
+    shortenedUrl = await shortenedUrls.getOne({ where: { id } });
     siteID = shortenedUrl.get('siteID');
   } catch (error) {
     return ErrorHelper.handleResponse(error, res);
@@ -51,5 +51,5 @@ module.exports = async function (req, res) {
     if (error.message == 'Not Found') { Logger.error('GETTER ERROR: ', error); }
   }
 
-  res.send(result);
+  res.redirect(shortenedUrl.get('url'));
 };

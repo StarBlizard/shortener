@@ -1,5 +1,8 @@
-const srequire      = require('srequire');
-const { url, PORT } = require('nconf').get('Server');
+const srequire     = require('srequire');
+const ServerConfig = require('nconf').get('Server');
+
+const URL  = ServerConfig.url;
+const PORT = ServerConfig.PORT;
 
 const ErrorHelper = srequire('error');
 const { sites, shortenedUrls } = srequire('models');
@@ -21,9 +24,9 @@ module.exports = async function (req, res) {
     const shortenedUrl = await shortenedUrls.generate({ url, siteID });
 
     const serverPORT = PORT ? `:${ PORT }` : '';
-    const result = `${ url }${ PORT }/get?=${ shortenedUrl.get('id') }`;
+    const result = `${ URL }${ serverPORT }/get?id=${ shortenedUrl.get('id') }`;
 
-    res.send(result);
+    res.send({ url: result });
   } catch (error) {
     return ErrorHelper.handleResponse(error, res);
   }
