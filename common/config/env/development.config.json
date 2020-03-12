@@ -1,0 +1,32 @@
+{
+  "Server": {
+    "PORT": 8001,
+    "url" : "http://localhost"
+  },
+
+  "Database": {
+    "database": "shortener",
+    "username": "postgres",
+    "password": "karplace",
+
+    "connection": {
+      "port"   : 5432,
+      "dialect": "postgres",
+      "host"   : "127.0.0.1",
+
+      "pool": {
+        "max"    : 5,
+        "min"    : 0,
+        "idle"   : 10000,
+        "acquire": 30000
+      }
+    },
+
+    "pool": {
+      "max"    : 5,
+      "min"    : 0,
+      "idle"   : 10000,
+      "acquire": 30000
+    }
+  }
+}

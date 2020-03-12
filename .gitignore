@@ -1,0 +1,14 @@
+node_modules
+*.log
+common/logs/**
+common/logs/app.log
+**.log
+common/logs/*.log
+package-lock.json
+*.lock
+.vscode
+.env
+**.swp
+**~
+server/.DS_Store
+server/api/.DS_Store

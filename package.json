@@ -1,0 +1,49 @@
+{
+  "name": "backend-marketplace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node scripts/start.js",
+    "start:staging": "forever start scripts/startstaging.js",
+    "start:prod": "node scripts/startprod.js",
+    "start:dev": "./node_modules/.bin/nodemon ./bin/www -w app.js -w server",
+    "test": "mocha --exit ./server/**/*.test.js ./common/**/*.test.js",
+    "cleanDB": "./node_modules/sequelize-cli/lib/sequelize db:drop"
+  },
+  "author": "Santiago C.",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "1.18.3",
+    "cookie-parser": "^1.4.3",
+    "cors": "2.8.5",
+    "express": "4.16.4",
+    "express-promise-router": "3.0.3",
+    "express-session": "^1.15.6",
+    "express-winston": "^3.0.1",
+    "forever": "^2.0.0",
+    "helmet": "^3.21.1",
+    "moment": "^2.24.0",
+    "morgan": "1.9.1",
+    "nconf": "^0.10.0",
+    "nodemon": "1.18.7",
+    "path": "0.12.7",
+    "pg": "7.7.1",
+    "pg-hstore": "2.3.2",
+    "pm2": "^3.5.0",
+    "request": "^2.88.0",
+    "sequelize": "^4.44.4",
+    "sequelize-cli": "^5.4.0",
+    "srequire": "^2.0.3",
+    "underscore": "^1.9.1",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@sinonjs/referee-sinon": "5.0.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^5.2.0",
+    "sinon": "7.2.2",
+    "sinon-chai": "^3.3.0"
+  }
+}

@@ -1,0 +1,36 @@
+const srequire = require('srequire');
+
+srequire.setBaseRoutes(srequire('common/baseRoutes.json'));
+
+const fs    = require('fs');
+const http  = require('http');
+const path  = require('path');
+const nconf = require('nconf');
+
+const Logger = srequire('logger');
+
+const env  = process.env.NODE_ENV || 'development';
+const port = process.env.PORT     || nconf.get('Server:PORT') || 8001;
+
+Logger.info(`Current Environment: ${ env }`);
+
+// Set the configuration file
+nconf.argv().env().file({ file: path.join(process.cwd(), `common/config/env/${env}.config.json`) });
+
+// This will be our application entry. We'll setup our server here.
+const app = srequire('app'); // The express app we just created
+
+app.set('port', port);
+
+const server = http.createServer(app);
+
+server.listen(port, () => {
+  // and all other routes & middleware will continue to work
+  Logger.info(`The server is running at localhost:${port}`);
+
+  try {
+    srequire('doodle')();
+  } catch (error) {
+    Logger.info('DOODLE ERROR: ', error);
+  }
+});

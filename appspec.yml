@@ -1,0 +1,15 @@
+version: 0.0
+os: linux
+files:
+  - source: ./
+    destination: /home/ubuntu/whatsapp_bot
+
+hooks:
+  BeforeInstall:
+    - location: scripts/beforeinstall.sh
+
+  AfterInstall:
+    - location: scripts/npminstall.sh
+
+  ApplicationStart:
+    - location: scripts/npmstart.sh

@@ -1,0 +1,12 @@
+{
+  "api"        : "server/api",
+  "error"      : "common/error",
+  "roles"      : "common/roles",
+  "logger"     : "common/logger",
+  "models"     : "server/db/models",
+  "strategies" : "common/strategies",
+  "routes"     : "server/api/routes",
+  "schemas"    : "server/api/schemas",
+  "middlewares": "server/api/middlewares",
+  "controllers": "server/api/controllers"
+}
