@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
   const shortenedUrls = sequelize.define('shortenedUrls', {
     siteID: DataTypes.INTEGER,
 
-    url: DataTypes.STRING,
+    url: DataTypes.TEXT,
 
     deletedAt: DataTypes.DATE
   }, { paranoid: true });

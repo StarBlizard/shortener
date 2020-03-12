@@ -15,7 +15,7 @@ module.exports = {
         key: 'id'
       },
 
-      url: Sequelize.STRING,
+      url: Sequelize.TEXT,
 
       deletedAt: Sequelize.DATE,
       createdAt: {

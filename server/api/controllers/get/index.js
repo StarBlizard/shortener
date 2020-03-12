@@ -32,7 +32,7 @@ module.exports = async function (req, res) {
     const webhook = await webhooks.getOne({ where: { id: siteID, type: 'CLICK' } });
 
     const serverPORT = PORT ? `:${ PORT }` : '';
-    const shortened = `${ url }${ PORT }/get?=${ shortenedUrl.get('id') }`;
+    const shortened = `${ url }${ serverPORT }/get?id=${ shortenedUrl.get('id') }`;
 
     if (webhook.get('endpoint')) {
       const siteRequest = await new Promise( (resolve, reject) => {
