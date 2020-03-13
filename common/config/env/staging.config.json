@@ -1,6 +1,5 @@
 {
   "Server": {
-    "PORT": 80,
     "url" : "short.karlo.io"
   },
 
