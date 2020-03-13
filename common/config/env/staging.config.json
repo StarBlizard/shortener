@@ -1,7 +1,7 @@
 {
   "Server": {
     "PORT": 80,
-    "url" : "18.191.15.18"
+    "url" : "short.karlo.io"
   },
 
   "Database": {
