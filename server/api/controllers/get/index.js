@@ -51,5 +51,9 @@ module.exports = async function (req, res) {
     if (error.message == 'Not Found') { Logger.error('GETTER ERROR: ', error); }
   }
 
-  res.redirect(shortenedUrl.get('url'));
+  let URL = shortenedUrl.get('url');
+
+  URL.indexOf('http://') == -1 && (URL = `http://${ URL }`);
+
+  res.redirect(URL);
 };
