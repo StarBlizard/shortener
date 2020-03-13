@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node scripts/start.js",
-    "start:staging": "forever start scripts/startstaging.js",
+    "start:staging": "nodemon start scripts/startstaging.js",
     "start:prod": "node scripts/startprod.js",
     "start:dev": "./node_modules/.bin/nodemon ./bin/www -w app.js -w server",
     "test": "mocha --exit ./server/**/*.test.js ./common/**/*.test.js",
@@ -21,7 +21,6 @@
     "express-promise-router": "3.0.3",
     "express-session": "^1.15.6",
     "express-winston": "^3.0.1",
-    "forever": "^2.0.0",
     "helmet": "^3.21.1",
     "moment": "^2.24.0",
     "morgan": "1.9.1",

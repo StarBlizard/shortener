@@ -12,7 +12,7 @@
     "connection": {
       "port"   : 5432,
       "dialect": "postgres",
-      "host"   : "127.0.0.1",
+      "host"   : "shortener.cra1owopgyhu.us-east-2.rds.amazonaws.com",
 
       "pool": {
         "max"    : 5,
