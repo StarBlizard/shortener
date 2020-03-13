@@ -53,7 +53,7 @@ module.exports = async function (req, res) {
 
   let URL = shortenedUrl.get('url');
 
-  URL.indexOf('http://') == -1 && (URL = `http://${ URL }`);
+  URL.indexOf('http') == -1 && (URL = `http://${ URL }`);
 
   res.redirect(URL);
 };
