@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node scripts/start.js",
-    "start:staging": "nodemon start scripts/startstaging.js",
+    "start:staging": "pm2 start ecosystem.config.js",
     "start:prod": "node scripts/startprod.js",
     "start:dev": "./node_modules/.bin/nodemon ./bin/www -w app.js -w server",
     "test": "mocha --exit ./server/**/*.test.js ./common/**/*.test.js",

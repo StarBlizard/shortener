@@ -1,6 +1,6 @@
 #!/bin/sh
-cd /home/ubuntu/karlo-backend
+cd /home/ubuntu/shortener
 
-sudo pm2 kill
+sudo pm2 kill all
 sudo npm install --save bcrypt
 sudo npm run start:staging

@@ -1,2 +1,2 @@
 #!/bin/sh
-sudo rm -fr /home/ubuntu/karlo-backend
+sudo rm -fr /home/ubuntu/shortener
