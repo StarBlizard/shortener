@@ -13,6 +13,7 @@ module.exports = {
     watch             : true,
     increment_var     : 'PORT',
     cwd               : process.cwd(),
+    env               : { NODE_ENV: 'staging' },
     env_staging       : { NODE_ENV: 'staging' },
     ignore_watch      : [ 'node_modules', 'common/logs' ]
   }]
