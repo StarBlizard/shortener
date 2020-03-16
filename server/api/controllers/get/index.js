@@ -29,7 +29,7 @@ module.exports = async function (req, res) {
   }
 
   try {
-    const webhook = await webhooks.getOne({ where: { id: siteID, type: 'CLICK' } });
+    const webhook = await webhooks.getOne({ where: { siteID, type: 'CLICK' } });
 
     const serverPORT = PORT ? `:${ PORT }` : '';
     const shortened = `${ url }${ serverPORT }/get?id=${ shortenedUrl.get('id') }`;
