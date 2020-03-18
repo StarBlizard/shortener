@@ -48,7 +48,12 @@ module.exports = async function (req, res) {
       });
     }
   } catch (error) {
-    if (error.message == 'Not Found') { Logger.error('GETTER ERROR: ', error); }
+    if (error.message == 'Not Found') {
+      Logger.error(url);
+      Logger.error('GETTER ERROR: ', error);
+    }
+
+    res.send('Url Not Available');
   }
 
   let URL = shortenedUrl.get('url');
