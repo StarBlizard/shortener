@@ -35,12 +35,16 @@ module.exports = async function (req, res) {
     const shortened = `${ url }${ serverPORT }/get?id=${ shortenedUrl.get('id') }`;
 
     if (webhook.get('endpoint')) {
+			let endpoint = webhook.get('endpoint');
+
+			endpoint.indexOf('http') > -1 || (endpoint = `http://${endpoint}`);
+
       const siteRequest = await new Promise( (resolve, reject) => {
         try {
           request.post({
             json: true,
-            body: { url: shortened },
-            url : webhook.get('endpoint')
+            url : endpoint,
+            body: { url: shortened }
           }, (error, response, body) => error ? reject(error) : resolve(body));
         } catch(error) {
           reject(error);
@@ -48,12 +52,10 @@ module.exports = async function (req, res) {
       });
     }
   } catch (error) {
-    if (error.message == 'Not Found') {
+    if (error.message != 'Not Found') {
       Logger.error(url);
       Logger.error('GETTER ERROR: ', error);
     }
-
-    res.send('Url Not Available');
   }
 
   let URL = shortenedUrl.get('url');
