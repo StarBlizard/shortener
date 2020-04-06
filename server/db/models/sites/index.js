@@ -1,8 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const sites = sequelize.define('sites', {
-    ip    : DataTypes.STRING,
-    name  : DataTypes.STRING,
-    domain: DataTypes.STRING,
+    ip      : DataTypes.STRING,
+    name    : DataTypes.STRING,
+    domain  : DataTypes.STRING,
+    notFound: DataTypes.STRING,
 
     deletedAt: DataTypes.DATE
   }, { paranoid: true });

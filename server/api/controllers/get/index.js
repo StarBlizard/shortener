@@ -4,7 +4,12 @@ const { url, PORT } = require('nconf').get('Server');
 
 const ErrorHelper = srequire('error');
 const Logger      = srequire('logger');
-const { webhooks, shortenedUrls } = srequire('models');
+
+const {
+  sites,
+  webhooks,
+  shortenedUrls
+} = srequire('models');
 
 module.exports = async function (req, res) {
   const { id } = req.query;
@@ -22,10 +27,25 @@ module.exports = async function (req, res) {
   let siteID;
 
   try {
-    shortenedUrl = await shortenedUrls.getOne({ where: { id } });
+    shortenedUrl = await shortenedUrls.getOne({ where: { id }, options: { paranoid: false } });
+
+    if (shortenedUrl.get('deletedAt')) { throw new Error('Not Found'); }
+
     siteID = shortenedUrl.get('siteID');
   } catch (error) {
-    return ErrorHelper.handleResponse(error, res);
+    if (!shortenedUrl) {
+      return ErrorHelper.handleResponse(error, res);
+    }
+
+    const site = await sites.getOne({ where: { id: shortenedUrl.get('siteID') } });
+    let notFoundUrl = site.get('notFound');
+
+    if (notFoundUrl) {
+			notFoundUrl.indexOf('http') > -1 || (notFoundUrl = `http://${ notFoundUrl }`);
+      return res.redirect(notFoundUrl);
+    } else {
+      return res.send('Link Not Available');
+    }
   }
 
   try {
@@ -37,7 +57,7 @@ module.exports = async function (req, res) {
     if (webhook.get('endpoint')) {
 			let endpoint = webhook.get('endpoint');
 
-			endpoint.indexOf('http') > -1 || (endpoint = `http://${endpoint}`);
+			endpoint.indexOf('http') > -1 || (endpoint = `http://${ endpoint }`);
 
       const siteRequest = await new Promise( (resolve, reject) => {
         try {
