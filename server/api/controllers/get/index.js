@@ -1,5 +1,6 @@
 const request       = require('request');
 const srequire      = require('srequire');
+const _             = require('underscore');
 const { url, PORT } = require('nconf').get('Server');
 
 const ErrorHelper = srequire('error');
@@ -64,12 +65,14 @@ module.exports = async function (req, res) {
           request.post({
             json: true,
             url : endpoint,
-            body: { url: shortened }
+            body: _.extend(req.query, { url: shortened })
           }, (error, response, body) => error ? reject(error) : resolve(body));
         } catch(error) {
           reject(error);
         }
       });
+
+      console.log(siteRequest);
     }
   } catch (error) {
     if (error.message != 'Not Found') {

@@ -6,6 +6,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('webhooks', [{
       id: 9999981,
+      siteID: 9999981,
 
       type    : 'CLICK',
       endpoint: 'http://localhost:8000/api/shortener/webhook',
