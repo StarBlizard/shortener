@@ -49,6 +49,8 @@ module.exports = async function (req, res) {
     }
   }
 
+  let siteRequest;
+
   try {
     const webhook = await webhooks.getOne({ where: { siteID, type: 'CLICK' } });
 
@@ -60,7 +62,7 @@ module.exports = async function (req, res) {
 
 			endpoint.indexOf('http') > -1 || (endpoint = `http://${ endpoint }`);
 
-      const siteRequest = await new Promise( (resolve, reject) => {
+      siteRequest = await new Promise( (resolve, reject) => {
         try {
           request.post({
             json: true,
@@ -72,7 +74,7 @@ module.exports = async function (req, res) {
         }
       });
 
-      console.log(siteRequest);
+      
     }
   } catch (error) {
     if (error.message != 'Not Found') {
@@ -82,6 +84,23 @@ module.exports = async function (req, res) {
   }
 
   let URL = shortenedUrl.get('url');
+
+  if (siteRequest) {
+    if (siteRequest.addQueryParams) {
+      let queryParams = _.reduce(siteRequest.addQueryParams, (result, value, key) => {
+        result += `&${ key }=${ value }`;
+        return result;
+      }, '');
+
+      if (URL.indexOf('?') == -1) {
+        queryParams = `?${ queryParams.replace('&', '') }`;
+      }
+
+      URL += queryParams;
+    }
+
+    siteRequest.replace && (URL = siteRequest.replace);
+  }
 
   URL.indexOf('http') == -1 && (URL = `http://${ URL }`);
 
